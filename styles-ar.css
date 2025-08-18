@@ -1,11 +1,5 @@
 /* Import main styles */
 @import url('styles.css');
-/* Subtle underline direction fix for RTL nav links */
-body[dir="rtl"] .nav-link::after {
-    left: 1rem;
-    right: 1rem;
-    transform-origin: right;
-}
 
 /* Arabic RTL Specific Styles */
 body[dir="rtl"] {

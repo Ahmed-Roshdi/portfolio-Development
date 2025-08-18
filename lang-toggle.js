@@ -5,30 +5,6 @@
     let langToggle = null;
     let currentLang = localStorage.getItem("lang") || "en";
 
-    // Map English <-> Arabic counterpart files for all pages
-    const langPairs = {
-        'index.html': 'index-ar.html',
-        'index-ar.html': 'index.html',
-        'ai.html': 'ai-ar.html',
-        'ai-ar.html': 'ai.html',
-        'cybersecurity.html': 'cybersecurity-ar.html',
-        'cybersecurity-ar.html': 'cybersecurity.html',
-        'programming_development.html': 'programming-ar.html',
-        'programming-ar.html': 'programming_development.html',
-        'graphic_design_content_creation.html': 'graphic-design-ar.html',
-        'graphic-design-ar.html': 'graphic_design_content_creation.html',
-        'audio_photo_lighting.html': 'audio-photo-ar.html',
-        'audio-photo-ar.html': 'audio_photo_lighting.html',
-        'content_writing_translation.html': 'content-writing-ar.html',
-        'content-writing-ar.html': 'content_writing_translation.html',
-        'emarketing.html': 'emarketing-ar.html',
-        'emarketing-ar.html': 'emarketing.html',
-        'science_research.html': 'science-research-ar.html',
-        'science-research-ar.html': 'science_research.html',
-        'vfx_editing.html': 'vfx-editing-ar.html',
-        'vfx-editing-ar.html': 'vfx_editing.html'
-    };
-
     function createLanguageToggle() {
         const navControls = document.querySelector(".nav-controls");
         if (!navControls) {
@@ -48,12 +24,12 @@
         langToggle.id = "langToggle";
         langToggle.innerHTML = "English <i class=\"fas fa-globe\"></i>";
         navControls.insertBefore(langToggle, navControls.firstChild);
-
-        // Add event listener (assigned after we decide behavior)
         
-        // Update initial state text/dir
+        // Add event listener
+        langToggle.addEventListener("click", toggleLanguage);
+        
+        // Update initial state
         updateLangToggleText();
-        attachToggleBehavior();
     }
 
     function loadTranslations() {
@@ -112,21 +88,6 @@
         }
     }
 
-    function attachToggleBehavior() {
-        if (!langToggle) return;
-        const file = (window.location.pathname.split('/').pop() || '').toLowerCase();
-        const mapped = langPairs[file];
-        // If we have a dedicated counterpart page, navigate instead of inline translating
-        if (mapped) {
-            langToggle.onclick = () => {
-                window.location.href = mapped;
-            };
-        } else {
-            // Fallback to in-page translation (mainly for index)
-            langToggle.onclick = toggleLanguage;
-        }
-    }
-
     function toggleLanguage() {
         currentLang = currentLang === "en" ? "ar" : "en";
         localStorage.setItem("lang", currentLang);
@@ -137,17 +98,7 @@
     // Initialize when DOM is ready
     function initializeLangToggle() {
         createLanguageToggle();
-        // If page relies on inline translations (no mapped counterpart), load and apply
-        const file = (window.location.pathname.split('/').pop() || '').toLowerCase();
-        if (!langPairs[file] || file === 'index.html' || file === 'index-ar.html') {
-            loadTranslations();
-        }
-
-        // Ensure RTL dir is set for Arabic pages on initial load
-        if (file.endsWith('-ar.html')) {
-            document.documentElement.setAttribute('dir', 'rtl');
-            localStorage.setItem('lang', 'ar');
-        }
+        loadTranslations();
     }
 
     if (document.readyState === 'loading') {
