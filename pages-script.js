@@ -47,15 +47,11 @@
                 return links.join('');
             }
 
-            // Create navbar if missing
-            let navbarEl = navbar;
-            if (!navbarEl) {
-                navbarEl = document.createElement('nav');
+            // Only inject a navbar if one does NOT already exist
+            if (!navbar) {
+                const navbarEl = document.createElement('nav');
                 navbarEl.className = 'navbar';
-                document.body.insertBefore(navbarEl, document.body.firstChild);
-            }
-
-            if (navbarEl) {
+                navbarEl.setAttribute('data-injected', 'true');
                 navbarEl.innerHTML = `
                     <div class="nav-container">
                         <div class="nav-logo">
@@ -79,17 +75,14 @@
                         </div>
                     </div>
                 `;
+                document.body.insertBefore(navbarEl, document.body.firstChild);
             }
 
-            // Create footer if missing
-            let footerEl = footer;
-            if (!footerEl) {
-                footerEl = document.createElement('footer');
+            // Only inject a footer if one does NOT already exist
+            if (!footer) {
+                const footerEl = document.createElement('footer');
                 footerEl.className = 'footer';
-                document.body.appendChild(footerEl);
-            }
-
-            if (footerEl) {
+                footerEl.setAttribute('data-injected', 'true');
                 footerEl.innerHTML = `
                     <div class="container">
                         <div class="footer-content">
@@ -98,6 +91,7 @@
                         </div>
                     </div>
                 `;
+                document.body.appendChild(footerEl);
             }
         } catch (e) {
             console.warn('Header/Footer injection failed:', e);
