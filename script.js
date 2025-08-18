@@ -124,14 +124,6 @@
 
     // Initialize everything when DOM is loaded
     function initializeApp() {
-        // Create language toggle button
-        createLanguageToggle();
-        
-        // Event listener for language toggle button
-        if (langToggle) {
-            langToggle.addEventListener("click", toggleLanguage);
-        }
-
         // Call loadTranslations on initial app load
         loadTranslations();
         

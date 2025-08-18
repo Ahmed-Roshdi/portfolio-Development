@@ -149,6 +149,45 @@ body {
     gap: 1rem;
 }
 
+/* Language Toggle Button */
+.lang-toggle {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+    min-width: 100px;
+    justify-content: center;
+}
+
+.lang-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+    filter: brightness(1.1);
+}
+
+.lang-toggle i {
+    font-size: 0.9rem;
+}
+
+/* Dark theme adjustments for language toggle */
+[data-theme="dark"] .lang-toggle {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    box-shadow: 0 3px 10px rgba(79, 195, 247, 0.3);
+}
+
+[data-theme="dark"] .lang-toggle:hover {
+    box-shadow: 0 5px 15px rgba(79, 195, 247, 0.4);
+}
+
 /* Theme Toggle Button */
 .theme-toggle {
     background: none;
