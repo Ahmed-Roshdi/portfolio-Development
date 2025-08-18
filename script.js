@@ -752,3 +752,233 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Enhanced animations and interactions loaded successfully!');
 });
 
+
+// Testimonials Slider Functionality
+let currentTestimonial = 0;
+const testimonials = document.querySelectorAll('.testimonial-card');
+const testimonialDots = document.querySelectorAll('.dot');
+let testimonialInterval;
+
+function showTestimonial(index) {
+    // Remove active class from all testimonials and dots
+    testimonials.forEach(testimonial => testimonial.classList.remove('active'));
+    testimonialDots.forEach(dot => dot.classList.remove('active'));
+    
+    // Add active class to current testimonial and dot
+    if (testimonials[index]) {
+        testimonials[index].classList.add('active');
+    }
+    if (testimonialDots[index]) {
+        testimonialDots[index].classList.add('active');
+    }
+    
+    currentTestimonial = index;
+}
+
+function nextTestimonial() {
+    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+    showTestimonial(currentTestimonial);
+}
+
+function prevTestimonial() {
+    currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+    showTestimonial(currentTestimonial);
+}
+
+function startTestimonialAutoplay() {
+    testimonialInterval = setInterval(nextTestimonial, 5000);
+}
+
+function stopTestimonialAutoplay() {
+    if (testimonialInterval) {
+        clearInterval(testimonialInterval);
+    }
+}
+
+// Initialize testimonials when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize testimonials
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    const testimonialDotsElements = document.querySelectorAll('.dot');
+    
+    if (testimonialCards.length > 0) {
+        showTestimonial(0);
+        startTestimonialAutoplay();
+        
+        // Add event listeners for navigation buttons
+        const nextBtn = document.getElementById('nextTestimonial');
+        const prevBtn = document.getElementById('prevTestimonial');
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                stopTestimonialAutoplay();
+                nextTestimonial();
+                startTestimonialAutoplay();
+            });
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                stopTestimonialAutoplay();
+                prevTestimonial();
+                startTestimonialAutoplay();
+            });
+        }
+        
+        // Add event listeners for dots
+        testimonialDotsElements.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopTestimonialAutoplay();
+                showTestimonial(index);
+                startTestimonialAutoplay();
+            });
+        });
+        
+        // Pause autoplay on hover
+        const testimonialSlider = document.querySelector('.testimonials-slider');
+        if (testimonialSlider) {
+            testimonialSlider.addEventListener('mouseenter', stopTestimonialAutoplay);
+            testimonialSlider.addEventListener('mouseleave', startTestimonialAutoplay);
+        }
+    }
+});
+
+
+
+// Scroll Position Preservation
+class ScrollPositionManager {
+    constructor() {
+        this.storageKey = 'scrollPositions';
+        this.currentPage = window.location.pathname;
+        this.init();
+    }
+
+    init() {
+        // Restore scroll position when page loads
+        window.addEventListener('load', () => {
+            this.restoreScrollPosition();
+        });
+
+        // Save scroll position before page unloads
+        window.addEventListener('beforeunload', () => {
+            this.saveScrollPosition();
+        });
+
+        // Save scroll position periodically while scrolling
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                this.saveScrollPosition();
+            }, 100);
+        });
+
+        // Save scroll position when clicking links
+        document.addEventListener('click', (e) => {
+            const link = e.target.closest('a');
+            if (link && link.href && !link.href.startsWith('#')) {
+                this.saveScrollPosition();
+            }
+        });
+    }
+
+    saveScrollPosition() {
+        const scrollData = this.getStoredData();
+        scrollData[this.currentPage] = {
+            x: window.pageXOffset || document.documentElement.scrollLeft,
+            y: window.pageYOffset || document.documentElement.scrollTop,
+            timestamp: Date.now()
+        };
+        
+        // Clean old entries (older than 24 hours)
+        const oneDayAgo = Date.now() - (24 * 60 * 60 * 1000);
+        Object.keys(scrollData).forEach(page => {
+            if (scrollData[page].timestamp < oneDayAgo) {
+                delete scrollData[page];
+            }
+        });
+
+        try {
+            localStorage.setItem(this.storageKey, JSON.stringify(scrollData));
+        } catch (e) {
+            console.warn('Could not save scroll position:', e);
+        }
+    }
+
+    restoreScrollPosition() {
+        const scrollData = this.getStoredData();
+        const position = scrollData[this.currentPage];
+        
+        if (position) {
+            // Use requestAnimationFrame to ensure DOM is ready
+            requestAnimationFrame(() => {
+                window.scrollTo({
+                    left: position.x,
+                    top: position.y,
+                    behavior: 'auto' // Instant scroll on page load
+                });
+            });
+        }
+    }
+
+    getStoredData() {
+        try {
+            const stored = localStorage.getItem(this.storageKey);
+            return stored ? JSON.parse(stored) : {};
+        } catch (e) {
+            console.warn('Could not retrieve scroll positions:', e);
+            return {};
+        }
+    }
+
+    // Method to manually save current position (useful for SPA navigation)
+    saveCurrentPosition() {
+        this.saveScrollPosition();
+    }
+
+    // Method to clear all stored positions
+    clearStoredPositions() {
+        try {
+            localStorage.removeItem(this.storageKey);
+        } catch (e) {
+            console.warn('Could not clear scroll positions:', e);
+        }
+    }
+}
+
+// Initialize scroll position manager
+const scrollManager = new ScrollPositionManager();
+
+// Smooth scroll enhancement for anchor links
+document.addEventListener('click', function(e) {
+    const link = e.target.closest('a[href^="#"]');
+    if (link) {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+            // Save current position before smooth scrolling
+            scrollManager.saveCurrentPosition();
+            
+            targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+            
+            // Update URL without triggering page reload
+            if (history.pushState) {
+                history.pushState(null, null, '#' + targetId);
+            }
+        }
+    }
+});
+
+// Enhanced back button support
+window.addEventListener('popstate', function(e) {
+    // Small delay to allow browser to handle the navigation
+    setTimeout(() => {
+        scrollManager.restoreScrollPosition();
+    }, 50);
+});
+

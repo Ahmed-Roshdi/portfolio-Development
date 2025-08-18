@@ -45,6 +45,7 @@
                 </li>
             </ul>
             <div class="nav-controls">
+                <button class="lang-toggle" onclick="window.location.href='index-ar.html'">العربية</button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <i class="fas fa-sun"></i>
                     <i class="fas fa-moon"></i>
@@ -206,7 +207,217 @@
         </div>
     </section>
 
+    <!-- Client Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title" data-translate="testimonials.title">Client Testimonials</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-track" id="testimonialTrack">
+                    <div class="testimonial-card active">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text" data-translate="testimonials.testimonial1.text">"Ahmed delivered exceptional work on our AI project. His expertise in machine learning and attention to detail exceeded our expectations. The solution was delivered on time and worked flawlessly."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name" data-translate="testimonials.testimonial1.name">Mohamed Hassan</h4>
+                                    <p class="author-title" data-translate="testimonials.testimonial1.title">Tech Startup CEO</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text" data-translate="testimonials.testimonial2.text">"Outstanding cybersecurity consultation! Ahmed identified vulnerabilities we didn't know existed and provided comprehensive solutions. Our system security improved dramatically."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name" data-translate="testimonials.testimonial2.name">Sarah Ahmed</h4>
+                                    <p class="author-title" data-translate="testimonials.testimonial2.title">IT Director</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="quote-icon">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            <p class="testimonial-text" data-translate="testimonials.testimonial3.text">"Ahmed's graphic design work transformed our brand identity. His creative vision and technical skills produced designs that perfectly captured our company's essence."</p>
+                            <div class="testimonial-author">
+                                <div class="author-info">
+                                    <h4 class="author-name" data-translate="testimonials.testimonial3.name">Ali Mahmoud</h4>
+                                    <p class="author-title" data-translate="testimonials.testimonial3.title">Marketing Manager</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-btn prev-btn" id="prevTestimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-dots" id="testimonialDots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                    </div>
+                    <button class="testimonial-btn next-btn" id="nextTestimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Professional Certifications Section -->
+    <section id="certifications" class="certifications">
+        <div class="container">
+            <h2 class="section-title" data-translate="certifications.title">Professional Certifications</h2>
+            <div class="certifications-grid">
+                <div class="certification-category">
+                    <div class="category-header">
+                        <i class="fas fa-brain"></i>
+                        <h3 data-translate="certifications.ai.title">Artificial Intelligence</h3>
+                    </div>
+                    <div class="certifications-list">
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.ai.cert1.name">Google AI Certification</h4>
+                                <p data-translate="certifications.ai.cert1.description">Machine Learning & Deep Learning</p>
+                                <span class="cert-year" data-translate="certifications.ai.cert1.year">2023</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.ai.cert2.name">Microsoft Azure AI</h4>
+                                <p data-translate="certifications.ai.cert2.description">AI Solutions Development</p>
+                                <span class="cert-year" data-translate="certifications.ai.cert2.year">2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certification-category">
+                    <div class="category-header">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3 data-translate="certifications.cybersecurity.title">Cybersecurity</h3>
+                    </div>
+                    <div class="certifications-list">
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.cybersecurity.cert1.name">CISSP Certified</h4>
+                                <p data-translate="certifications.cybersecurity.cert1.description">Information Systems Security</p>
+                                <span class="cert-year" data-translate="certifications.cybersecurity.cert1.year">2022</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.cybersecurity.cert2.name">CEH Certification</h4>
+                                <p data-translate="certifications.cybersecurity.cert2.description">Ethical Hacking</p>
+                                <span class="cert-year" data-translate="certifications.cybersecurity.cert2.year">2022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certification-category">
+                    <div class="category-header">
+                        <i class="fas fa-code"></i>
+                        <h3 data-translate="certifications.programming.title">Programming</h3>
+                    </div>
+                    <div class="certifications-list">
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.programming.cert1.name">AWS Solutions Architect</h4>
+                                <p data-translate="certifications.programming.cert1.description">Cloud Development</p>
+                                <span class="cert-year" data-translate="certifications.programming.cert1.year">2023</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.programming.cert2.name">Python Professional</h4>
+                                <p data-translate="certifications.programming.cert2.description">Advanced Programming</p>
+                                <span class="cert-year" data-translate="certifications.programming.cert2.year">2021</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certification-category">
+                    <div class="category-header">
+                        <i class="fas fa-palette"></i>
+                        <h3 data-translate="certifications.design.title">Design & Media</h3>
+                    </div>
+                    <div class="certifications-list">
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.design.cert1.name">Adobe Certified Expert</h4>
+                                <p data-translate="certifications.design.cert1.description">Creative Suite Mastery</p>
+                                <span class="cert-year" data-translate="certifications.design.cert1.year">2022</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.design.cert2.name">Video Production Pro</h4>
+                                <p data-translate="certifications.design.cert2.description">Advanced VFX & Editing</p>
+                                <span class="cert-year" data-translate="certifications.design.cert2.year">2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certification-category">
+                    <div class="category-header">
+                        <i class="fas fa-microscope"></i>
+                        <h3 data-translate="certifications.science.title">Science & Research</h3>
+                    </div>
+                    <div class="certifications-list">
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.science.cert1.name">Research Methodology</h4>
+                                <p data-translate="certifications.science.cert1.description">Scientific Analysis</p>
+                                <span class="cert-year" data-translate="certifications.science.cert1.year">2021</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.science.cert2.name">Data Science Professional</h4>
+                                <p data-translate="certifications.science.cert2.description">Statistical Analysis</p>
+                                <span class="cert-year" data-translate="certifications.science.cert2.year">2022</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="certification-category">
+                    <div class="category-header">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3 data-translate="certifications.marketing.title">Digital Marketing</h3>
+                    </div>
+                    <div class="certifications-list">
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.marketing.cert1.name">Google Ads Certified</h4>
+                                <p data-translate="certifications.marketing.cert1.description">Digital Advertising</p>
+                                <span class="cert-year" data-translate="certifications.marketing.cert1.year">2023</span>
+                            </div>
+                        </div>
+                        <div class="certification-item">
+                            <div class="cert-info">
+                                <h4 data-translate="certifications.marketing.cert2.name">Meta Marketing Pro</h4>
+                                <p data-translate="certifications.marketing.cert2.description">Social Media Strategy</p>
+                                <span class="cert-year" data-translate="certifications.marketing.cert2.year">2023</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
@@ -266,6 +477,131 @@
                             <a href="#" class="btn btn-small btn-outline">GitHub</a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Partners Section -->
+    <section id="partners" class="partners">
+        <div class="container">
+            <h2 class="section-title" data-translate="partners.title">Success Partners</h2>
+            <p class="partners-subtitle" data-translate="partners.subtitle">Trusted by leading companies worldwide</p>
+            
+            <div class="partners-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label" data-translate="partners.stats.clients">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label" data-translate="partners.stats.projects">Completed Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label" data-translate="partners.stats.countries">Countries Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label" data-translate="partners.stats.experience">Years Experience</div>
+                </div>
+            </div>
+
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <h4>Microsoft</h4>
+                    <p data-translate="partners.microsoft">Cloud Solutions Partner</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <h4>Google</h4>
+                    <p data-translate="partners.google">AI Development Partner</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-amazon"></i>
+                    </div>
+                    <h4>Amazon</h4>
+                    <p data-translate="partners.amazon">AWS Solutions Provider</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-apple"></i>
+                    </div>
+                    <h4>Apple</h4>
+                    <p data-translate="partners.apple">iOS Development Partner</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-meta"></i>
+                    </div>
+                    <h4>Meta</h4>
+                    <p data-translate="partners.meta">Social Media Solutions</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-adobe"></i>
+                    </div>
+                    <h4>Adobe</h4>
+                    <p data-translate="partners.adobe">Creative Solutions Partner</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-spotify"></i>
+                    </div>
+                    <h4>Spotify</h4>
+                    <p data-translate="partners.spotify">Audio Technology Partner</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-tesla"></i>
+                    </div>
+                    <h4>Tesla</h4>
+                    <p data-translate="partners.tesla">Innovation Technology</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-netflix"></i>
+                    </div>
+                    <h4>Netflix</h4>
+                    <p data-translate="partners.netflix">Content Technology</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-salesforce"></i>
+                    </div>
+                    <h4>Salesforce</h4>
+                    <p data-translate="partners.salesforce">CRM Solutions Partner</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-slack"></i>
+                    </div>
+                    <h4>Slack</h4>
+                    <p data-translate="partners.slack">Communication Solutions</p>
+                </div>
+                
+                <div class="partner-card">
+                    <div class="partner-logo">
+                        <i class="fab fa-shopify"></i>
+                    </div>
+                    <h4>Shopify</h4>
+                    <p data-translate="partners.shopify">E-commerce Solutions</p>
                 </div>
             </div>
         </div>
