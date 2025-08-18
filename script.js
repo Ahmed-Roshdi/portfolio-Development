@@ -2,8 +2,6 @@
     'use strict';
 
     // Language Translation System
-    let langToggle = null;
-    
     function createLanguageToggle() {
         const navControls = document.querySelector(".nav-controls");
         if (!navControls) {
@@ -11,76 +9,27 @@
             return;
         }
         
-        langToggle = document.createElement("button");
+        const currentPath = window.location.pathname;
+        const isArabicPage = currentPath.includes("index-ar.html");
+
+        const langToggle = document.createElement("button");
         langToggle.className = "lang-toggle";
         langToggle.id = "langToggle";
-        langToggle.innerHTML = "English <i class=\"fas fa-globe\"></i>";
+        langToggle.innerHTML = isArabicPage ? "English <i class=\"fas fa-globe\"></i>" : "العربية <i class=\"fas fa-globe\"></i>";
         navControls.insertBefore(langToggle, navControls.firstChild);
-    }
 
-    let currentLang = localStorage.getItem("lang") || "en";
-
-    function loadTranslations() {
-        fetch("translations.js")
-            .then(response => response.text())
-            .then(text => {
-                const translationsScript = document.createElement("script");
-                translationsScript.innerHTML = text;
-                document.head.appendChild(translationsScript);
-                translationsScript.onload = () => {
-                    applyTranslations();
-                };
-            })
-            .catch(error => console.error("Error loading translations.js:", error));
-    }
-
-    function applyTranslations() {
-        document.querySelectorAll("[data-translate]").forEach(element => {
-            const key = element.getAttribute("data-translate");
-            const translatedText = getTranslation(key);
-            if (translatedText) {
-                element.innerHTML = translatedText;
+        langToggle.addEventListener("click", () => {
+            if (isArabicPage) {
+                window.location.href = "index.html";
+            } else {
+                window.location.href = "index-ar.html";
             }
         });
-        updateLangToggleText();
     }
 
-    function getTranslation(key) {
-        const keys = key.split(".");
-        let result = translations[currentLang];
-        for (const k of keys) {
-            if (result && result[k] !== undefined) {
-                result = result[k];
-            } else {
-                console.warn(`Translation key not found: ${key} for language ${currentLang}`);
-                return null;
-            }
-        }
-        return result;
-    }
-
-    function updateLangToggleText() {
-        if (!langToggle) return;
-        
-        if (currentLang === "en") {
-            langToggle.innerHTML = "العربية <i class=\"fas fa-globe\"></i>";
-            document.documentElement.setAttribute('dir', 'ltr');
-        } else {
-            langToggle.innerHTML = "English <i class=\"fas fa-globe\"></i>";
-            document.documentElement.setAttribute('dir', 'rtl');
-        }
-    }
-
-    function toggleLanguage() {
-        currentLang = currentLang === "en" ? "ar" : "en";
-        localStorage.setItem("lang", currentLang);
-        applyTranslations();
-        updateLangToggleText();
-    }
 
     // Theme Management
     let currentTheme = localStorage.getItem('theme') || 'light';
-    let themeToggle = null;
 
     // Initialize theme on page load
     function initializeTheme() {
@@ -124,8 +73,7 @@
 
     // Initialize everything when DOM is loaded
     function initializeApp() {
-        // Call loadTranslations on initial app load
-        loadTranslations();
+        createLanguageToggle();
         
         // Initialize theme
         initializeTheme();
@@ -164,9 +112,15 @@
                     e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
+                        const offset = 100; // Adjust this value as needed
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = target.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
                         });
                     }
                 }
