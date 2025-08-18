@@ -42,8 +42,16 @@
                 return links.join('');
             }
 
-            if (navbar) {
-                navbar.innerHTML = `
+            // Create navbar if missing
+            let navbarEl = navbar;
+            if (!navbarEl) {
+                navbarEl = document.createElement('nav');
+                navbarEl.className = 'navbar';
+                document.body.insertBefore(navbarEl, document.body.firstChild);
+            }
+
+            if (navbarEl) {
+                navbarEl.innerHTML = `
                     <div class="nav-container">
                         <div class="nav-logo">
                             <a href="${homeHref}" data-translate="nav.home">Ahmed Roshdi</a>
@@ -68,8 +76,16 @@
                 `;
             }
 
-            if (footer) {
-                footer.innerHTML = `
+            // Create footer if missing
+            let footerEl = footer;
+            if (!footerEl) {
+                footerEl = document.createElement('footer');
+                footerEl.className = 'footer';
+                document.body.appendChild(footerEl);
+            }
+
+            if (footerEl) {
+                footerEl.innerHTML = `
                     <div class="container">
                         <div class="footer-content">
                             <p data-translate="footer.copyright">© 2025 Ahmed Roshdi. All rights reserved.</p>
@@ -80,6 +96,33 @@
             }
         } catch (e) {
             console.warn('Header/Footer injection failed:', e);
+        }
+    }
+
+    // Ensure base styles and icon fonts are present
+    function ensureBaseAssets() {
+        const head = document.head;
+        if (!head) return;
+
+        function hasLink(hrefIncludes) {
+            return Array.from(document.querySelectorAll('link[rel="stylesheet"]')).some(l => (l.getAttribute('href') || '').includes(hrefIncludes));
+        }
+        function addStylesheet(href) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = href;
+            head.appendChild(link);
+        }
+
+        if (!hasLink('styles.css')) {
+            addStylesheet('styles.css');
+        }
+        if (!hasLink('font-awesome') && !hasLink('cdnjs.cloudflare.com/ajax/libs/font-awesome')) {
+            addStylesheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
+        }
+        // Keep page-specific fonts; we do not override Arabic Cairo font
+        if (!hasLink('fonts.googleapis.com') && document.documentElement.getAttribute('dir') !== 'rtl') {
+            addStylesheet('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         }
     }
     
@@ -203,8 +246,9 @@
 
     // Initialize everything when DOM is loaded
     function initializeApp() {
-        // Inject consistent header/footer first so translations can apply to them
+        // Inject consistent header/footer and ensure styles before translations
         injectHeaderFooter();
+        ensureBaseAssets();
 
         // Call loadTranslations on initial app load
         loadTranslations();
