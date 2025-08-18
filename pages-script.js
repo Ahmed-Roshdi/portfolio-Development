@@ -4,6 +4,85 @@
     // Language Translation System
     let langToggle = null;
     
+    // Inject a unified header and footer across all pages for a consistent experience
+    function injectHeaderFooter() {
+        try {
+            const navbar = document.querySelector('.navbar');
+            const footer = document.querySelector('.footer');
+
+            const homeHref = 'https://ahmed-roshdi.github.io/portfolio/';
+
+            // Build Expertise dropdown links
+            const expertiseDropdown = `
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-translate="nav.expertise">Expertise</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="ai.html" class="dropdown-link">Artificial Intelligence</a></li>
+                        <li><a href="cybersecurity.html" class="dropdown-link">Cybersecurity</a></li>
+                        <li><a href="programming_development.html" class="dropdown-link">Programming & Development</a></li>
+                        <li><a href="graphic_design_content_creation.html" class="dropdown-link">Graphic Design & Content Creation</a></li>
+                        <li><a href="audio_photo_lighting.html" class="dropdown-link">Audio, Photo & Lighting</a></li>
+                        <li><a href="content_writing_translation.html" class="dropdown-link">Content Writing & Translation</a></li>
+                        <li><a href="vfx_editing.html" class="dropdown-link">VFX & Video Editing</a></li>
+                        <li><a href="emarketing.html" class="dropdown-link">E-Marketing</a></li>
+                        <li><a href="science_research.html" class="dropdown-link">Science & Research</a></li>
+                    </ul>
+                </li>`;
+
+            // Build section links dynamically if sections exist on page
+            function buildSectionLinks() {
+                const links = [];
+                if (document.getElementById('services')) links.push('<li class="nav-item"><a href="#services" class="nav-link">Services</a></li>');
+                if (document.getElementById('portfolio')) links.push('<li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>');
+                if (document.getElementById('tools')) links.push('<li class="nav-item"><a href="#tools" class="nav-link">Tools</a></li>');
+                if (document.getElementById('stats')) links.push('<li class="nav-item"><a href="#stats" class="nav-link">Stats</a></li>');
+                if (document.getElementById('certifications')) links.push('<li class="nav-item"><a href="#certifications" class="nav-link">Certifications</a></li>');
+                if (document.getElementById('projects')) links.push('<li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>');
+                if (document.getElementById('contact')) links.push('<li class="nav-item"><a href="#contact" class="nav-link" data-translate="nav.contact">Contact</a></li>');
+                return links.join('');
+            }
+
+            if (navbar) {
+                navbar.innerHTML = `
+                    <div class="nav-container">
+                        <div class="nav-logo">
+                            <a href="${homeHref}" data-translate="nav.home">Ahmed Roshdi</a>
+                        </div>
+                        <ul class="nav-menu">
+                            <li class="nav-item"><a href="${homeHref}" class="nav-link" data-translate="nav.home">Home</a></li>
+                            ${expertiseDropdown}
+                            ${buildSectionLinks()}
+                        </ul>
+                        <div class="nav-controls">
+                            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                                <i class="fas fa-sun"></i>
+                                <i class="fas fa-moon"></i>
+                            </button>
+                            <div class="hamburger">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (footer) {
+                footer.innerHTML = `
+                    <div class="container">
+                        <div class="footer-content">
+                            <p data-translate="footer.copyright">© 2025 Ahmed Roshdi. All rights reserved.</p>
+                            <p data-translate="footer.builtWith">Built with ❤️ and lots of ☕</p>
+                        </div>
+                    </div>
+                `;
+            }
+        } catch (e) {
+            console.warn('Header/Footer injection failed:', e);
+        }
+    }
+    
     function createLanguageToggle() {
         const navControls = document.querySelector(".nav-controls");
         if (!navControls) {
@@ -124,6 +203,9 @@
 
     // Initialize everything when DOM is loaded
     function initializeApp() {
+        // Inject consistent header/footer first so translations can apply to them
+        injectHeaderFooter();
+
         // Call loadTranslations on initial app load
         loadTranslations();
         
