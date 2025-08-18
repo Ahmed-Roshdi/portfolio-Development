@@ -1238,6 +1238,65 @@ body {
     }
 }
 
+/* Dropdown Menu (Expertise) */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 260px;
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: var(--shadow-strong);
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown:hover .dropdown-menu,
+.dropdown.active .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li { margin: 0; }
+
+.dropdown-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.dropdown-link:hover {
+    background: rgba(0, 255, 65, 0.08);
+    color: var(--primary-color);
+}
+
+/* Mobile dropdown: show inside flow */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        display: none;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    .dropdown.active .dropdown-menu { display: block; }
+    .dropdown-link { padding: 0.6rem 1.25rem; }
+}
+
 @media (max-width: 480px) {
     .hero-title {
         font-size: 2rem;
