@@ -142,17 +142,32 @@ body {
     text-decoration: none;
     font-weight: 500;
     font-family: var(--font-primary);
-    transition: all 0.3s ease;
+    transition: color 0.2s ease;
     position: relative;
     padding: 0.5rem 1rem;
-    border: 1px solid transparent;
+}
+
+/* Subtle underline on hover instead of heavy glow */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 0.3rem;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-color), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+    opacity: 0.9;
 }
 
 .nav-link:hover {
     color: var(--primary-color);
-    border-color: var(--border-color);
-    box-shadow: var(--border-glow);
-    background: rgba(0, 255, 65, 0.1);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
 }
 
 /* Navigation Controls */
@@ -335,8 +350,7 @@ body {
 .btn-primary:hover {
     background: transparent;
     color: var(--primary-color);
-    box-shadow: var(--shadow-strong);
-    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(0,255,65,0.25);
 }
 
 .btn-secondary {
@@ -348,8 +362,7 @@ body {
 .btn-secondary:hover {
     background: var(--text-color);
     color: var(--bg-color);
-    box-shadow: var(--shadow-glow);
-    transform: translateY(-2px);
+    box-shadow: 0 0 16px rgba(0,255,65,0.15);
 }
 
 /* Threat Level Indicator */
@@ -650,8 +663,8 @@ body {
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: var(--shadow-strong);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35), 0 0 18px rgba(0,255,65,0.2);
     border-color: var(--primary-color);
 }
 
@@ -1279,7 +1292,7 @@ body {
 }
 
 .dropdown-link:hover {
-    background: rgba(0, 255, 65, 0.08);
+    background: rgba(0, 255, 65, 0.06);
     color: var(--primary-color);
 }
 
