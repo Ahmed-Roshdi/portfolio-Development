@@ -1,9 +1,8 @@
 // Professional Translation System - English to Arabic
 // نظام الترجمة الاحترافي - من الإنجليزية إلى العربية
 
-(function() {
-    // Expose a clean global `translations` object only. No extra code here.
-    window.translations = {
+// Expose a clean global `translations` object only. No extra code here.
+window.translations = {
     en: {
         // Navigation
         nav: {
@@ -328,5 +327,4 @@
             contactTitle: "مستعد لتأمين أصولك الرقمية؟",
             contactDescription: "دعنا نناقش كيف يمكننا حماية مؤسستك من التهديدات السيبرانية."
         }
-    };
-})();
+};
