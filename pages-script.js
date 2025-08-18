@@ -114,8 +114,9 @@
             head.appendChild(link);
         }
 
-        if (!hasLink('styles.css')) {
-            addStylesheet('styles.css');
+        // Ensure new core stylesheet is present
+        if (!hasLink('core.css')) {
+            addStylesheet('core.css');
         }
         if (!hasLink('font-awesome') && !hasLink('cdnjs.cloudflare.com/ajax/libs/font-awesome')) {
             addStylesheet('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css');
