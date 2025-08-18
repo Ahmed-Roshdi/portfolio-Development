@@ -34,6 +34,7 @@
                 </li>
             </ul>
             <div class="nav-controls">
+                <button class="lang-toggle" id="langToggle">English</button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
                     <i class="fas fa-sun"></i>
                     <i class="fas fa-moon"></i>
@@ -48,14 +49,15 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('science-lab-research.jpg'); background-size: cover; background-position: center;">
+    <section class="hero" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('Btm30T8zLGO4.jpg'); background-size: cover; background-position: center;">
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">Science & <span class="highlight">Research Journey</span></h1>
                 <p class="hero-subtitle">A Lifelong Pursuit of Knowledge and Innovation</p>
                 <p class="hero-description">
                     Driven by an insatiable curiosity and a deep passion for scientific exploration, I delve into diverse fields,
-                    from engineering to psychology, constantly seeking to understand and innovate through rigorous research and experimentation.
+                    from advanced laboratory research to cutting-edge experimentation, constantly seeking to understand and innovate 
+                    through rigorous scientific methodology and breakthrough discoveries.
                 </p>
                 <div class="hero-buttons">
                     <a href="#fields" class="btn btn-primary">Explore Fields</a>
@@ -64,7 +66,19 @@
             </div>
             <div class="hero-visual">
                 <div class="science-visual">
-                    <img src="lab-scientist-work.jpg" alt="Laboratory Research" style="width: 400px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <img src="Btm30T8zLGO4.jpg" alt="Advanced Laboratory Research" style="width: 400px; height: 300px; object-fit: cover; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    <div class="lab-overlay">
+                        <div class="lab-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">500+</span>
+                                <span class="stat-label">Experiments</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">Research Fields</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -101,60 +115,85 @@
     </section>
 
     <!-- Fields Section -->
-    <section id="fields" class="services" style="background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('chemistry-lab-modern.jpg'); background-size: cover; background-position: center;">
+    <section id="fields" class="services" style="background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); padding: 100px 0;">
         <div class="container">
-            <h2 class="section-title" style="color: white;">Fields of Scientific Exploration</h2>
+            <h2 class="section-title">Fields of Scientific Exploration</h2>
+            <div class="lab-showcase" style="text-align: center; margin-bottom: 60px;">
+                <img src="Btm30T8zLGO4.jpg" alt="Advanced Laboratory Equipment" style="width: 100%; max-width: 800px; height: 400px; object-fit: cover; border-radius: 20px; box-shadow: 0 30px 60px rgba(0,0,0,0.2); margin-bottom: 30px;">
+                <p style="font-size: 18px; color: #666; max-width: 600px; margin: 0 auto;">
+                    State-of-the-art laboratory facilities where breakthrough research and experimentation take place across multiple scientific disciplines.
+                </p>
+            </div>
             <div class="services-grid">
-                <div class="service-card" style="background: rgba(255,255,255,0.95);">
+                <div class="service-card" style="background: rgba(255,255,255,0.95); transform: translateY(0); transition: all 0.3s ease;">
                     <div class="service-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
                     <h3>Engineering</h3>
-                    <p>Applying advanced scientific principles to design revolutionary structures, intelligent machines, and sustainable systems that solve real-world challenges through innovative engineering solutions.</p>
+                    <p>Applying advanced scientific principles to design revolutionary structures, intelligent machines, and sustainable systems. From robotics to aerospace engineering, pushing the boundaries of what's possible through innovative solutions.</p>
+                    <div class="field-stats">
+                        <span class="stat-badge">50+ Projects</span>
+                    </div>
                 </div>
-                <div class="service-card" style="background: rgba(255,255,255,0.95);">
+                <div class="service-card" style="background: rgba(255,255,255,0.95); transform: translateY(0); transition: all 0.3s ease;">
                     <div class="service-icon">
                         <i class="fas fa-heartbeat"></i>
                     </div>
                     <h3>Medicine</h3>
-                    <p>Exploring cutting-edge medical research, from molecular biology to personalized medicine, developing novel therapeutic approaches and diagnostic technologies for improved human health outcomes.</p>
+                    <p>Exploring cutting-edge medical research, from molecular biology to personalized medicine. Developing novel therapeutic approaches, diagnostic technologies, and treatment methodologies for improved human health outcomes.</p>
+                    <div class="field-stats">
+                        <span class="stat-badge">Medical Research</span>
+                    </div>
                 </div>
-                <div class="service-card" style="background: rgba(255,255,255,0.95);">
+                <div class="service-card" style="background: rgba(255,255,255,0.95); transform: translateY(0); transition: all 0.3s ease;">
                     <div class="service-icon">
                         <i class="fas fa-dna"></i>
                     </div>
                     <h3>Biology</h3>
-                    <p>Investigating life at all scales, from cellular mechanisms to ecosystem dynamics, with focus on genetic engineering, synthetic biology, and biotechnological applications for sustainable solutions.</p>
+                    <p>Investigating life at all scales, from cellular mechanisms to ecosystem dynamics. Focus on genetic engineering, synthetic biology, and biotechnological applications for sustainable solutions and environmental conservation.</p>
+                    <div class="field-stats">
+                        <span class="stat-badge">Biotech Focus</span>
+                    </div>
                 </div>
-                <div class="service-card" style="background: rgba(255,255,255,0.95);">
+                <div class="service-card" style="background: rgba(255,255,255,0.95); transform: translateY(0); transition: all 0.3s ease;">
                     <div class="service-icon">
                         <i class="fas fa-flask"></i>
                     </div>
                     <h3>Chemistry</h3>
-                    <p>Researching molecular interactions and chemical processes to develop new materials, catalysts, and pharmaceutical compounds that advance technology and improve quality of life.</p>
+                    <p>Researching molecular interactions and chemical processes to develop new materials, catalysts, and pharmaceutical compounds. Laboratory work focuses on synthesis, analysis, and material science innovations.</p>
+                    <div class="field-stats">
+                        <span class="stat-badge">Lab Synthesis</span>
+                    </div>
                 </div>
-                <div class="service-card" style="background: rgba(255,255,255,0.95);">
+                <div class="service-card" style="background: rgba(255,255,255,0.95); transform: translateY(0); transition: all 0.3s ease;">
                     <div class="service-icon">
                         <i class="fas fa-atom"></i>
                     </div>
                     <h3>Physics</h3>
-                    <p>Exploring fundamental laws governing the universe, from quantum mechanics to astrophysics, pursuing breakthrough discoveries in energy, computing, and space exploration technologies.</p>
+                    <p>Exploring fundamental laws governing the universe, from quantum mechanics to astrophysics. Pursuing breakthrough discoveries in energy, computing, and space exploration technologies through experimental physics.</p>
+                    <div class="field-stats">
+                        <span class="stat-badge">Quantum Research</span>
+                    </div>
                 </div>
-                <div class="service-card" style="background: rgba(255,255,255,0.95);">
+                <div class="service-card" style="background: rgba(255,255,255,0.95); transform: translateY(0); transition: all 0.3s ease;">
                     <div class="service-icon">
                         <i class="fas fa-mountain"></i>
                     </div>
                     <h3>Geology</h3>
-                    <p>Studying Earth's dynamic processes and mineral resources to understand climate change, predict natural disasters, and develop sustainable extraction methods for critical materials.</p>
+                    <p>Studying Earth's dynamic processes and mineral resources to understand climate change, predict natural disasters, and develop sustainable extraction methods for critical materials and environmental protection.</p>
+                    <div class="field-stats">
+                        <span class="stat-badge">Earth Sciences</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </section>
+                <div class="service-card" style="background: rgba(255,255,255,0.95); transform: translateY(0); transition: all 0.3s ease;">
                     <div class="service-icon">
                         <i class="fas fa-brain"></i>
                     </div>
                     <h3>Psychology</h3>
-                    <p>Delving into the human mind and behavior, including cognitive, emotional, and social processes.</p>
+                    <p>Delving into the human mind and behavior, including cognitive, emotional, and social processes. Research focuses on behavioral analysis, cognitive psychology, and the intersection of neuroscience and psychology.</p>
+                    <div class="field-stats">
+                        <span class="stat-badge">Cognitive Science</span>
+                    </div>
                 </div>
             </div>
         </div>
