@@ -7,10 +7,15 @@
     // Inject a unified header and footer across all pages for a consistent experience
     function injectHeaderFooter() {
         try {
+            // Skip injection for RTL pages (Arabic sections)
+            const dir = document.documentElement.getAttribute('dir') || '';
+            if (dir.toLowerCase() === 'rtl') {
+                return;
+            }
             const navbar = document.querySelector('.navbar');
             const footer = document.querySelector('.footer');
 
-            const homeHref = 'https://ahmed-roshdi.github.io/portfolio/';
+            const homeHref = 'https://ahmed-roshdi.github.io/portfolio-Development/';
 
             // Build Expertise dropdown links
             const expertiseDropdown = `
