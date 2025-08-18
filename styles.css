@@ -105,7 +105,7 @@ body {
     color: var(--text-color);
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
     position: relative;
 }
 
@@ -124,9 +124,7 @@ body {
     transition: width 0.3s ease;
 }
 
-.nav-link:hover::after {
-    width: 100%;
-}
+.nav-link:hover::after { width: 100%; }
 
 .hamburger {
     display: none;
@@ -1360,23 +1358,16 @@ body {
 
 
 /* Enhanced Theme Consistency Rules */
-/* Ensure all text elements follow theme colors */
-h1, h2, h3, h4, h5, h6 {
-    color: var(--text-color) !important;
-}
-
-p, span, div, li, a {
-    color: var(--text-color);
-}
+/* Ensure all text elements follow theme colors but allow hero overrides */
+h1, h2, h3, h4, h5, h6 { color: var(--text-color); }
+p, span, div, li, a { color: var(--text-color); }
 
 /* Override any hardcoded colors for better theme consistency */
 .hero h1, .hero h2, .hero h3 {
     color: white !important;
 }
 
-.hero p, .hero span {
-    color: rgba(255, 255, 255, 0.9) !important;
-}
+.hero p, .hero span { color: rgba(255, 255, 255, 0.9); }
 
 /* Ensure form elements follow theme */
 input, textarea, select {

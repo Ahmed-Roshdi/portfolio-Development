@@ -142,6 +142,12 @@
         if (!langPairs[file] || file === 'index.html' || file === 'index-ar.html') {
             loadTranslations();
         }
+
+        // Ensure RTL dir is set for Arabic pages on initial load
+        if (file.endsWith('-ar.html')) {
+            document.documentElement.setAttribute('dir', 'rtl');
+            localStorage.setItem('lang', 'ar');
+        }
     }
 
     if (document.readyState === 'loading') {
