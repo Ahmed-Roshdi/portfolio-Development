@@ -1,22 +1,16 @@
 (function() {
     'use strict';
 
-    // Language Translation System
-    function createLanguageToggle() {
-        const navControls = document.querySelector(".nav-controls");
-        if (!navControls) {
-            console.error("Nav controls not found");
+    // Language Toggle System - Updated to use existing buttons
+    function initializeLanguageToggle() {
+        const langToggle = document.getElementById("langToggle");
+        if (!langToggle) {
+            console.error("Language toggle button not found");
             return;
         }
         
         const currentPath = window.location.pathname;
         const isArabicPage = currentPath.includes("index-ar.html");
-
-        const langToggle = document.createElement("button");
-        langToggle.className = "lang-toggle";
-        langToggle.id = "langToggle";
-        langToggle.innerHTML = isArabicPage ? "English <i class=\"fas fa-globe\"></i>" : "العربية <i class=\"fas fa-globe\"></i>";
-        navControls.insertBefore(langToggle, navControls.firstChild);
 
         langToggle.addEventListener("click", () => {
             if (isArabicPage) {
@@ -73,7 +67,7 @@
 
     // Initialize everything when DOM is loaded
     function initializeApp() {
-        createLanguageToggle();
+        initializeLanguageToggle();
         
         // Initialize theme
         initializeTheme();
