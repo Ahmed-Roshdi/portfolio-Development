@@ -5,25 +5,26 @@
     function initializeLanguageToggle() {
         const langToggle = document.getElementById("langToggle");
         if (!langToggle) {
-            console.error("Language toggle button not found");
             return;
         }
-        
-        const currentPath = window.location.pathname;
-        const isArabicPage = currentPath.includes("index-ar.html");
 
+        // Only attach index <-> index-ar navigation on the home pages
+        const file = (window.location.pathname.split('/').pop() || '').toLowerCase();
+        const isHome = file === '' || file === 'index.html' || file === 'index-ar.html';
+        if (!isHome) {
+            return; // subpages use in-page translation via lang-toggle.js
+        }
+
+        const isArabicHome = file === 'index-ar.html';
         langToggle.addEventListener("click", () => {
-            if (isArabicPage) {
-                window.location.href = "index.html";
-            } else {
-                window.location.href = "index-ar.html";
-            }
+            window.location.href = isArabicHome ? "index.html" : "index-ar.html";
         });
     }
 
 
     // Theme Management
     let currentTheme = localStorage.getItem('theme') || 'light';
+    let themeToggle = null;
 
     // Initialize theme on page load
     function initializeTheme() {
@@ -34,16 +35,14 @@
     // Update theme icon based on current theme
     function updateThemeIcon() {
         if (!themeToggle) return;
-        
         const sunIcon = themeToggle.querySelector('.fa-sun');
         const moonIcon = themeToggle.querySelector('.fa-moon');
-        
         if (currentTheme === 'dark') {
-            if (sunIcon) sunIcon.style.display = 'inline-block';
-            if (moonIcon) moonIcon.style.display = 'none';
-        } else {
             if (sunIcon) sunIcon.style.display = 'none';
             if (moonIcon) moonIcon.style.display = 'inline-block';
+        } else {
+            if (sunIcon) sunIcon.style.display = 'inline-block';
+            if (moonIcon) moonIcon.style.display = 'none';
         }
     }
 
