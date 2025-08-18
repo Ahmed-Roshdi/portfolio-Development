@@ -410,3 +410,266 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+// Enhanced Animations and Interactions
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                
+                // Animate stats counters
+                if (entry.target.classList.contains('stat-number')) {
+                    animateCounter(entry.target);
+                }
+                
+                // Stagger animation for skill items
+                if (entry.target.classList.contains('skills-grid')) {
+                    staggerAnimation(entry.target.querySelectorAll('.skill-item'));
+                }
+                
+                // Stagger animation for project cards
+                if (entry.target.classList.contains('projects-grid')) {
+                    staggerAnimation(entry.target.querySelectorAll('.project-card'));
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for animation
+    document.querySelectorAll('.section-title, .stat-number, .skills-grid, .projects-grid').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Counter animation function
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target')) || parseInt(element.textContent);
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                element.textContent = target + (element.textContent.includes('%') ? '%' : '+');
+                clearInterval(timer);
+            } else {
+                element.textContent = Math.floor(current) + (element.textContent.includes('%') ? '%' : '+');
+            }
+        }, 16);
+    }
+
+    // Stagger animation function
+    function staggerAnimation(elements) {
+        elements.forEach((el, index) => {
+            setTimeout(() => {
+                el.style.animation = `fadeInUp 0.6s ease-out both`;
+            }, index * 100);
+        });
+    }
+
+    // Enhanced typing effect for hero title
+    function typeWriter(element, text, speed = 100) {
+        let i = 0;
+        element.innerHTML = '';
+        
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+
+    // Apply typing effect to hero title
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        const originalText = heroTitle.textContent;
+        setTimeout(() => {
+            typeWriter(heroTitle, originalText, 50);
+        }, 1000);
+    }
+
+    // Enhanced parallax scrolling
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.hero');
+        
+        parallaxElements.forEach(element => {
+            const speed = 0.5;
+            element.style.transform = `translateY(${scrolled * speed}px)`;
+        });
+    });
+
+    // Enhanced mouse cursor effects
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    cursor.style.cssText = `
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transition: transform 0.1s ease;
+        opacity: 0;
+    `;
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX - 10 + 'px';
+        cursor.style.top = e.clientY - 10 + 'px';
+        cursor.style.opacity = '0.7';
+    });
+
+    // Enhanced hover effects for interactive elements
+    document.querySelectorAll('a, button, .project-card, .skill-item').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(2)';
+            cursor.style.opacity = '0.3';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.opacity = '0.7';
+        });
+    });
+
+    // Enhanced form validation with animations
+    const formInputs = document.querySelectorAll('input, textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', () => {
+            if (!input.value) {
+                input.parentElement.classList.remove('focused');
+            }
+        });
+        
+        input.addEventListener('invalid', () => {
+            input.style.animation = 'shake 0.5s ease-in-out';
+            setTimeout(() => {
+                input.style.animation = '';
+            }, 500);
+        });
+    });
+
+    // Shake animation for invalid inputs
+    const shakeKeyframes = `
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+    `;
+    
+    const style = document.createElement('style');
+    style.textContent = shakeKeyframes;
+    document.head.appendChild(style);
+
+    // Enhanced loading states for buttons
+    document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            if (this.classList.contains('loading')) return;
+            
+            this.classList.add('loading');
+            const originalText = this.textContent;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            
+            setTimeout(() => {
+                this.classList.remove('loading');
+                this.innerHTML = originalText;
+            }, 2000);
+        });
+    });
+
+    // Enhanced page transitions
+    function fadeInPage() {
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        
+        setTimeout(() => {
+            document.body.style.opacity = '1';
+        }, 100);
+    }
+
+    // Apply page transition on load
+    fadeInPage();
+
+    // Enhanced scroll progress indicator
+    const progressBar = document.createElement('div');
+    progressBar.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        z-index: 9999;
+        transition: width 0.1s ease;
+    `;
+    document.body.appendChild(progressBar);
+
+    window.addEventListener('scroll', () => {
+        const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        progressBar.style.width = scrollPercent + '%';
+    });
+
+    // Enhanced theme transition with particle effects
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            createParticleEffect(themeToggle);
+        });
+    }
+
+    function createParticleEffect(element) {
+        const rect = element.getBoundingClientRect();
+        const particles = 12;
+        
+        for (let i = 0; i < particles; i++) {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: fixed;
+                width: 4px;
+                height: 4px;
+                background: var(--primary-color);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                left: ${rect.left + rect.width / 2}px;
+                top: ${rect.top + rect.height / 2}px;
+            `;
+            
+            document.body.appendChild(particle);
+            
+            const angle = (i / particles) * Math.PI * 2;
+            const velocity = 100;
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity;
+            
+            particle.animate([
+                { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+                { transform: `translate(${vx}px, ${vy}px) scale(0)`, opacity: 0 }
+            ], {
+                duration: 600,
+                easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            }).onfinish = () => particle.remove();
+        }
+    }
+
+    console.log('Enhanced animations and interactions loaded successfully!');
+});
+

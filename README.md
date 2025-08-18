@@ -40,13 +40,13 @@ A modern, responsive personal portfolio website built with HTML, CSS, and JavaSc
 
 ### Installation
 1. Download or clone the project files
-2. Open `Index.HTML` in your web browser
+2. Open `index.html` in your web browser
 3. The website will load automatically
 
 ### File Structure
 ```
 My-Projects/
-├── Index.HTML          # Main HTML file
+├── index.html          # Main HTML file
 ├── styles.css          # CSS styles and animations
 ├── script.js           # JavaScript functionality
 ├── Index1.HTML         # Backup/alternative HTML file
