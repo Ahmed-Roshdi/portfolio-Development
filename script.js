@@ -1,7 +1,83 @@
-// Enhanced Theme Management System
 (function() {
     'use strict';
+
+    // Language Translation System
+    let langToggle = null;
     
+    function createLanguageToggle() {
+        const navControls = document.querySelector(".nav-controls");
+        if (!navControls) {
+            console.error("Nav controls not found");
+            return;
+        }
+        
+        langToggle = document.createElement("button");
+        langToggle.className = "lang-toggle";
+        langToggle.id = "langToggle";
+        langToggle.innerHTML = "English <i class=\"fas fa-globe\"></i>";
+        navControls.insertBefore(langToggle, navControls.firstChild);
+    }
+
+    let currentLang = localStorage.getItem("lang") || "en";
+
+    function loadTranslations() {
+        fetch("translations.js")
+            .then(response => response.text())
+            .then(text => {
+                const translationsScript = document.createElement("script");
+                translationsScript.innerHTML = text;
+                document.head.appendChild(translationsScript);
+                translationsScript.onload = () => {
+                    applyTranslations();
+                };
+            })
+            .catch(error => console.error("Error loading translations.js:", error));
+    }
+
+    function applyTranslations() {
+        document.querySelectorAll("[data-translate]").forEach(element => {
+            const key = element.getAttribute("data-translate");
+            const translatedText = getTranslation(key);
+            if (translatedText) {
+                element.innerHTML = translatedText;
+            }
+        });
+        updateLangToggleText();
+    }
+
+    function getTranslation(key) {
+        const keys = key.split(".");
+        let result = translations[currentLang];
+        for (const k of keys) {
+            if (result && result[k] !== undefined) {
+                result = result[k];
+            } else {
+                console.warn(`Translation key not found: ${key} for language ${currentLang}`);
+                return null;
+            }
+        }
+        return result;
+    }
+
+    function updateLangToggleText() {
+        if (!langToggle) return;
+        
+        if (currentLang === "en") {
+            langToggle.innerHTML = "العربية <i class=\"fas fa-globe\"></i>";
+            document.documentElement.setAttribute('dir', 'ltr');
+        } else {
+            langToggle.innerHTML = "English <i class=\"fas fa-globe\"></i>";
+            document.documentElement.setAttribute('dir', 'rtl');
+        }
+    }
+
+    function toggleLanguage() {
+        currentLang = currentLang === "en" ? "ar" : "en";
+        localStorage.setItem("lang", currentLang);
+        applyTranslations();
+        updateLangToggleText();
+    }
+
     // Theme Management
     let currentTheme = localStorage.getItem('theme') || 'light';
     let themeToggle = null;
@@ -48,6 +124,17 @@
 
     // Initialize everything when DOM is loaded
     function initializeApp() {
+        // Create language toggle button
+        createLanguageToggle();
+        
+        // Event listener for language toggle button
+        if (langToggle) {
+            langToggle.addEventListener("click", toggleLanguage);
+        }
+
+        // Call loadTranslations on initial app load
+        loadTranslations();
+        
         // Initialize theme
         initializeTheme();
         
